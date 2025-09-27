@@ -1,0 +1,142 @@
+[gd_scene load_steps=5 format=3 uid="uid://ieisg6b7t27m"]
+
+[ext_resource type="Script" uid="uid://dbp4hakdjaolm" path="res://Clickety-Wrestling/GameManager.gd" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://dhq51bg7q66sl" path="res://Clickety-Wrestling/Player.gd" id="2_uu6xs"]
+[ext_resource type="Script" uid="uid://b12aclcljuhms" path="res://Clickety-Wrestling/PromptControl.gd" id="3_r0du0"]
+[ext_resource type="Script" uid="uid://cxttglw0t7k3m" path="res://Clickety-Wrestling/MenuPanel.gd" id="4_cm0pq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_glv2v")
+
+[node name="Player1" type="Node" parent="."]
+script = ExtResource("2_uu6xs")
+
+[node name="Player2" type="Node" parent="."]
+script = ExtResource("2_uu6xs")
+player_id = 2
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="P1Bar" type="ProgressBar" parent="UI"]
+custom_minimum_size = Vector2(350, 50)
+offset_right = 4.0
+offset_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+metadata/_edit_use_anchors_ = true
+
+[node name="P2Bar" type="ProgressBar" parent="UI"]
+custom_minimum_size = Vector2(350, 50)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -4.0
+offset_bottom = 27.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
+metadata/_edit_use_anchors_ = true
+
+[node name="P1Prompt" type="Control" parent="UI"]
+z_index = 1
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_r0du0")
+metadata/_edit_use_anchors_ = true
+
+[node name="MainLabel" type="Label" parent="UI/P1Prompt"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
+
+[node name="P2Prompt" type="Control" parent="UI"]
+z_index = 1
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_r0du0")
+metadata/_edit_use_anchors_ = true
+
+[node name="MainLabel" type="Label" parent="UI/P2Prompt"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
+
+[node name="P1Name" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "Player 1"
+
+[node name="P2Name" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "Player 2"
+
+[node name="MenuPanel" type="Control" parent="UI"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_cm0pq")
+
+[node name="Backdrop" type="ColorRect" parent="UI/MenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.003921569)
+
+[node name="Center" type="CenterContainer" parent="UI/MenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/MenuPanel/Center"]
+custom_minimum_size = Vector2(520, 260)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="UI/MenuPanel/Center/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BigTitle" type="Label" parent="UI/MenuPanel/Center/Panel/VBox"]
+layout_mode = 2
+text = "Clickety Wrestling"
+
+[node name="Title" type="Label" parent="UI/MenuPanel/Center/Panel/VBox"]
+layout_mode = 2
+text = "Enter Player Names"
+
+[node name="P1Edit" type="LineEdit" parent="UI/MenuPanel/Center/Panel/VBox"]
+layout_mode = 2
+placeholder_text = "Player 1"
+
+[node name="P2Edit" type="LineEdit" parent="UI/MenuPanel/Center/Panel/VBox"]
+layout_mode = 2
+placeholder_text = "Player 2"
+
+[node name="StartButton" type="Button" parent="UI/MenuPanel/Center/Panel/VBox"]
+layout_mode = 2
+text = "Start"
