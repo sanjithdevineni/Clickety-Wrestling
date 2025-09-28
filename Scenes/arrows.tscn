@@ -1,0 +1,111 @@
+[gd_scene load_steps=17 format=3 uid="uid://d1jhhatt33074"]
+
+[ext_resource type="Texture2D" uid="uid://l45yl88srtbu" path="res://Assets/Green_Arrow.png" id="1_8yay4"]
+[ext_resource type="Texture2D" uid="uid://wu7hyyut71jl" path="res://Assets/Red_Arrow.png" id="2_213b3"]
+[ext_resource type="Texture2D" uid="uid://0gurae8wt1xl" path="res://Assets/Yellow_Arrow.png" id="3_uiee6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p5hy"]
+atlas = ExtResource("1_8yay4")
+region = Rect2(183, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1m7h"]
+atlas = ExtResource("1_8yay4")
+region = Rect2(0, 225, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erwvk"]
+atlas = ExtResource("1_8yay4")
+region = Rect2(0, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w5on"]
+atlas = ExtResource("1_8yay4")
+region = Rect2(183, 225, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy5pj"]
+atlas = ExtResource("2_213b3")
+region = Rect2(183, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmxlf"]
+atlas = ExtResource("2_213b3")
+region = Rect2(0, 225, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50glp"]
+atlas = ExtResource("2_213b3")
+region = Rect2(0, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kpch"]
+atlas = ExtResource("2_213b3")
+region = Rect2(183, 225, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_346fj"]
+atlas = ExtResource("3_uiee6")
+region = Rect2(183, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sclb"]
+atlas = ExtResource("3_uiee6")
+region = Rect2(0, 225, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxkr1"]
+atlas = ExtResource("3_uiee6")
+region = Rect2(0, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq0cl"]
+atlas = ExtResource("3_uiee6")
+region = Rect2(183, 225, 183, 225)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frkhe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p5hy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1m7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erwvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2w5on")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy5pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmxlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50glp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kpch")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_346fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sclb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxkr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq0cl")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[node name="Arrows" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_frkhe")
+animation = &"red"

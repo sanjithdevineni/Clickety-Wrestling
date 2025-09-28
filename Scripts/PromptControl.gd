@@ -1,7 +1,7 @@
 extends Control
 
 @onready var label: Label = get_node_or_null("MainLabel") as Label
-@onready var arrow_sprite: AnimatedSprite2D = $"../../RedArrow"   # your sprite node
+@onready var arrow_sprite: AnimatedSprite2D = $"Arrows"   # your sprite node
 
 var _seq_len := 0
 
@@ -12,6 +12,13 @@ const DIR_TO_FRAME := {
 	"right": 1,
 	"down": 2,
 	"left": 3
+}
+
+# Which animation set to use for each phase
+const PHASE_TO_ANIM := {
+	0: "green",   # Phase.GREEN
+	1: "red",     # Phase.RED
+	2: "yellow"   # Phase.YELLOW
 }
 
 func _ensure_label() -> bool:
@@ -31,17 +38,21 @@ func show_arrow_color(dir: String, p) -> void:
 	if not _ensure_label(): 
 		push_warning("MainLabel not found under %s" % name)
 		return
-	label.text = "%s : %s" % [_phase_name(p), DIR_TO_ARROW.get(dir, "?")]
+	#label.text = "%s : %s" % [_phase_name(p), DIR_TO_ARROW.get(dir, "?")]
+	label.text = _phase_name(p)
 	match int(p):
 		0: label.add_theme_color_override("font_color", Color.hex(0x35c759ff)) # green
 		1: label.add_theme_color_override("font_color", Color.hex(0xff3b30ff)) # red
 		2: label.add_theme_color_override("font_color", Color.hex(0xffcc00ff)) # yellow
 		# update arrow sprite frame
 	if dir in DIR_TO_FRAME:
-		arrow_sprite.animation = "default"    # make sure it’s set
-		arrow_sprite.play()
+		var anim_name = PHASE_TO_ANIM.get(int(p), "red")
+		arrow_sprite.animation = anim_name
+		arrow_sprite.stop()
 		arrow_sprite.frame = DIR_TO_FRAME[dir]
-		arrow_sprite.stop()   # lock on that frame
+		print("Showing dir=", dir, " frame=", DIR_TO_FRAME[dir])  # lock on that frame
+		arrow_sprite.z_index = 2
+		label.z_index = 1
 
 func set_pop_visible(on: bool) -> void:
 	if not _ensure_label(): return
