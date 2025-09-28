@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmywdqpgfs4xh"]
+[gd_scene load_steps=7 format=3 uid="uid://dmywdqpgfs4xh"]
 
 [ext_resource type="FontFile" uid="uid://dd1vumkq76et8" path="res://Assets/Fonts/Game Paused DEMO.otf" id="1_5doqj"]
 [ext_resource type="Script" uid="uid://bfcjxljrdgjh7" path="res://Scripts/button.gd" id="1_8p7yn"]
 [ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://Assets/Floor.jpg" id="2_dxknu"]
+[ext_resource type="PackedScene" uid="uid://cb5xo2dqokv6y" path="res://Scenes/music.tscn" id="4_s7gfc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5doqj"]
 texture = ExtResource("2_dxknu")
@@ -84,5 +85,7 @@ z_index = -100
 tile_set = SubResource("TileSet_s7gfc")
 format = 2
 layer_0/tile_data = PackedInt32Array(327706, 0, 0, 393270, 0, 0, 262223, 0, 0, 1179669, 0, 0, 1245234, 0, 0, 1245263, 0, 0, 852047, 0, 0, 917583, 0, 0, 2031643, 0, 0, 2097201, 0, 0, 2162760, 0, 0, 2883666, 0, 0, 2687022, 0, 0, 2883606, 0, 0, 3342361, 0, 0, 3342398, 0, 0, 3604559, 0, 0, 327682, 0, 0, 917506, 0, 0, 2031619, 0, 0, 1638400, 0, 0, 2883586, 0, 0, 3670018, 0, 0, 3932261, 0, 0, 3145832, 0, 0, 3211368, 0, 0, 2031723, 0, 0, 2424939, 0, 0, 1048684, 0, 0, 1114220, 0, 0, 196715, 0, 0, -196563, 0, 0, -131027, 0, 0, -393202, 0, 0, -130998, 0, 0, -130966, 0, 0, -65430, 0, 0, 4128780, 0, 0, 4194316, 0, 0, 4063273, 0, 0, 4259912, 0, 0)
+
+[node name="Music" parent="." instance=ExtResource("4_s7gfc")]
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

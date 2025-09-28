@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dr4r6e2fi5xo"
+path="res://.godot/imported/One Man Symphony - Undauntable (Free) - 01 Undauntable.mp3-6778bf4f4d1df34567c2cf16f4ded88e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/One Man Symphony - Undauntable (Free) - 01 Undauntable.mp3"
+dest_files=["res://.godot/imported/One Man Symphony - Undauntable (Free) - 01 Undauntable.mp3-6778bf4f4d1df34567c2cf16f4ded88e.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

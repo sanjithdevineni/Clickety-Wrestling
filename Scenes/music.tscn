@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb5xo2dqokv6y"]
+
+[ext_resource type="AudioStream" uid="uid://dr4r6e2fi5xo" path="res://Assets/Music/One Man Symphony - Undauntable (Free) - 01 Undauntable.mp3" id="1_fbmny"]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_fbmny")
+autoplay = true
