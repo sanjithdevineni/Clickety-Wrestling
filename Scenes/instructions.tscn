@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqwg3cpledopo"]
+[gd_scene load_steps=5 format=3 uid="uid://dmywdqpgfs4xh"]
 
-[ext_resource type="Script" path="res://Scripts/button.gd" id="1_8p7yn"]
-[ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://assets/Floor.jpg" id="2_dxknu"]
+[ext_resource type="Script" uid="uid://bfcjxljrdgjh7" path="res://Scripts/button.gd" id="1_8p7yn"]
+[ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://Assets/Floor.jpg" id="2_dxknu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5doqj"]
 texture = ExtResource("2_dxknu")
@@ -41,10 +41,11 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -236.47418
-offset_right = 236.47418
-offset_bottom = 548.47205
+offset_top = 1.7586544
+offset_right = 203.52582
+offset_bottom = 648.75867
 grow_horizontal = 2
-scale = Vector2(1.0080267, 1.0512971)
+scale = Vector2(1.1129893, 1.0464476)
 text = "                                         Instructions
 Both players must match the direction of the arrows
  using WASD (Player One) or the Arrow Keys (Player Two). 
@@ -67,9 +68,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -31.0
-offset_right = 48.0
+offset_left = 125.0
+offset_top = -243.0
+offset_right = 625.0
+offset_bottom = -143.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Main Menu"
