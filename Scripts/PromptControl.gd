@@ -1,8 +1,12 @@
 extends Control
 
 @onready var label: Label = get_node_or_null("MainLabel") as Label
+<<<<<<< Updated upstream
 @onready var arrow_sprite: AnimatedSprite2D = $"Arrows"   # your sprite node
 
+=======
+@onready var arrow_sprite: AnimatedSprite2D = $"../../RedArrow"   # your sprite node
+>>>>>>> Stashed changes
 var _seq_len := 0
 
 const DIR_TO_ARROW := {"up":"↑","down":"↓","left":"←","right":"→"}
@@ -46,6 +50,7 @@ func show_arrow_color(dir: String, p) -> void:
 		2: label.add_theme_color_override("font_color", Color.hex(0xffcc00ff)) # yellow
 		# update arrow sprite frame
 	if dir in DIR_TO_FRAME:
+<<<<<<< Updated upstream
 		var anim_name = PHASE_TO_ANIM.get(int(p), "red")
 		arrow_sprite.animation = anim_name
 		arrow_sprite.stop()
@@ -53,6 +58,14 @@ func show_arrow_color(dir: String, p) -> void:
 		print("Showing dir=", dir, " frame=", DIR_TO_FRAME[dir])  # lock on that frame
 		arrow_sprite.z_index = 2
 		label.z_index = 1
+=======
+		arrow_sprite.animation = "default"    # select the animation
+		arrow_sprite.stop()                   # make sure it's not animating
+		arrow_sprite.frame = DIR_TO_FRAME[dir]
+		print("Showing dir=", dir, " frame=", DIR_TO_FRAME[dir])
+	arrow_sprite.z_index = 2
+	label.z_index = 1
+>>>>>>> Stashed changes
 
 func set_pop_visible(on: bool) -> void:
 	if not _ensure_label(): return
