@@ -27,20 +27,23 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LineEdit" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 311.0
+layout_mode = 1
+offset_left = 175.0
 offset_top = 6.0
-offset_right = 753.584
-offset_bottom = 415.87247
+offset_right = 685.6738
+offset_bottom = 378.91287
 scale = Vector2(2.467328, 2.1104126)
 alignment = 3
 
 [node name="Label" type="Label" parent="LineEdit"]
-layout_mode = 0
-offset_left = 0.40442538
-offset_top = -2.8430457
-offset_right = 473.35278
-offset_bottom = 545.629
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -236.47418
+offset_right = 236.47418
+offset_bottom = 548.47205
+grow_horizontal = 2
 scale = Vector2(1.0080267, 1.0512971)
 text = "                                         Instructions
 Both players must match the direction of the arrows
@@ -57,11 +60,18 @@ When the screen says “GO!”, the first player to press a
 First to fill their bar till 100% win."
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 962.0
-offset_top = 761.0
-offset_right = 1379.0
-offset_bottom = 869.0
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -31.0
+offset_right = 48.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Main Menu"
 script = ExtResource("1_8p7yn")
 
