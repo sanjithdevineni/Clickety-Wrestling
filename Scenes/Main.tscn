@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ieisg6b7t27m"]
+[gd_scene load_steps=6 format=3 uid="uid://ieisg6b7t27m"]
 
 [ext_resource type="Script" uid="uid://wi260e1iw7yv" path="res://Scripts/GameManager.gd" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://bqr4udpwhbmx2" path="res://Scripts/Player.gd" id="2_uu6xs"]
 [ext_resource type="Script" uid="uid://b37v4clvfxo0t" path="res://Scripts/PromptControl.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://diqldobutofpt" path="res://Scripts/MenuPanel.gd" id="4_cm0pq"]
+[ext_resource type="Script" uid="uid://bl11ggs5y8hx2" path="res://Scripts/VictoryPanel.gd" id="5_pbw6q"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -140,3 +141,52 @@ placeholder_text = "Player 2"
 [node name="StartButton" type="Button" parent="UI/MenuPanel/Center/Panel/VBox"]
 layout_mode = 2
 text = "Start"
+
+[node name="VictoryPanel" type="Control" parent="UI"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_pbw6q")
+
+[node name="Backdrop" type="ColorRect" parent="UI/VictoryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Center" type="CenterContainer" parent="UI/VictoryPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="UI/VictoryPanel/Center"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="UI/VictoryPanel/Center/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WinTitle" type="Label" parent="UI/VictoryPanel/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+
+[node name="WinnerName" type="Label" parent="UI/VictoryPanel/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+
+[node name="PlayAgain" type="Button" parent="UI/VictoryPanel/Center/Panel/VBox"]
+layout_mode = 2
+text = "Play Again"
+
+[node name="MenuButton" type="Button" parent="UI/VictoryPanel/Center/Panel/VBox"]
+layout_mode = 2
+text = "Main Menu"

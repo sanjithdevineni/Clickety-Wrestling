@@ -11,7 +11,9 @@ var phase: Phase = Phase.GREEN
 @onready var p1_name := $"../UI/P1Name"
 @onready var p2_name := $"../UI/P2Name"
 @onready var menu := $"../UI/MenuPanel"
+@onready var victory := $"../UI/VictoryPanel"
 
+var round_active := false
 var game_active := false
 var target_dir := "right"
 var red_pop_time := 0.0
@@ -91,10 +93,11 @@ func start_game(p1n: String, p2n: String) -> void:
 	(p2_name as CanvasItem).show()
 
 	_reset_match()
+	round_active = true
 	_start_phase(Phase.GREEN)
 
 func _process(delta: float) -> void:
-	if not game_active:
+	if not game_active or not round_active:
 		return
 	phase_time_left -= delta
 	if p1_boost_time > 0: p1_boost_time -= delta
@@ -150,11 +153,41 @@ func _start_phase(new_phase: int) -> void:
 
 func _end_round():
 	audio.pitch_scale = 1.0
+	round_active = false
+
 	var winner := "Draw"
-	if p1_progress > p2_progress: winner = "Player 1"
-	elif p2_progress > p1_progress: winner = "Player 2"
-	print("Winner:", winner)
-	get_tree().create_timer(1.0).timeout.connect(func(): _reset_match())
+	if p1_progress > p2_progress:
+		winner = (p1_name as Label).text if (p1_name is Label) else "Player 1"
+	elif p2_progress > p1_progress:
+		winner = (p2_name as Label).text if (p2_name is Label) else "Player 2"
+
+	set_hud_visible(false)  # hide bars/prompts/names under the overlay
+	if victory:
+		victory.call("show_winner", winner)
+		
+func return_to_menu() -> void:
+	round_active = false
+	game_active = false
+	_reset_match()
+	set_hud_visible(false)
+	if victory:
+		(victory as CanvasItem).visible = false
+	# Prefill last names in the menu (optional)
+	var n1 := (p1_name as Label).text if (p1_name is Label) else ""
+	var n2 := (p2_name as Label).text if (p2_name is Label) else ""
+	if menu:
+		if menu.has_method("show_menu"):
+			menu.call("show_menu", n1, n2)
+		else:
+			(menu as CanvasItem).visible = true
+
+				
+func start_new_round() -> void:
+	set_hud_visible(true)   # show bars/prompts/names again
+	_reset_match()          # zero progress, clear boosts, etc.
+	round_active = true
+	_start_phase(Phase.GREEN)
+
 
 func _reset_match():
 	p1_progress = 0; p2_progress = 0
@@ -171,7 +204,7 @@ func _make_seq(n: int) -> Array[String]:
 	return arr
 
 func on_player_tap(player: int, dir: String) -> void:
-	if not game_active:
+	if not game_active or not round_active:
 		return
 	match phase:
 		Phase.GREEN:

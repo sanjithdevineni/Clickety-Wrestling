@@ -58,3 +58,11 @@ func _on_start() -> void:
 		gm.set_hud_visible(true)
 
 	visible = false
+
+func show_menu(p1_default: String = "", p2_default: String = "") -> void:
+	visible = true
+	if "set_hud_visible" in gm:
+		gm.set_hud_visible(false)
+	if p1_default != "": p1_edit.text = p1_default
+	if p2_default != "": p2_edit.text = p2_default
+	p1_edit.grab_focus()
