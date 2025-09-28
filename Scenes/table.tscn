@@ -18,7 +18,7 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 texture_filter = 1
-position = Vector2(800.9999, 577)
-scale = Vector2(22.570314, 13.3647)
+position = Vector2(765, 354.00003)
+scale = Vector2(28.56641, 16.915205)
 sprite_frames = SubResource("SpriteFrames_5cpa6")
 animation = &"Table"

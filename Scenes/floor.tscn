@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://drplyisbn7int"]
+[gd_scene load_steps=7 format=3 uid="uid://drplyisbn7int"]
 
-[ext_resource type="Texture2D" uid="uid://bco0146cfcmny" path="res://Floor.jpg" id="1_nvnu3"]
 [ext_resource type="PackedScene" uid="uid://c2sdi14kuf5v6" path="res://Scenes/table.tscn" id="2_agfsv"]
+[ext_resource type="PackedScene" uid="uid://34o2dng7inly" path="res://Scenes/Players.tscn" id="2_wjf51"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_agfsv"]
 load_path = "res://.godot/imported/Floor.png-1986a68a011c9d9847f815defae65829.ctex"
@@ -15,6 +15,9 @@ texture_region_size = Vector2i(120, 120)
 [sub_resource type="TileSet" id="TileSet_1fqph"]
 sources/1 = SubResource("TileSetAtlasSource_wjf51")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nvnu3"]
+load_path = "res://.godot/imported/Floor.jpg-1d63b82657145677b0d90a11683da159.ctex"
+
 [node name="Floor" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -24,7 +27,10 @@ tile_set = SubResource("TileSet_1fqph")
 texture_filter = 1
 offset_right = 1594.0
 offset_bottom = 891.0
-texture = ExtResource("1_nvnu3")
+texture = SubResource("CompressedTexture2D_nvnu3")
 
 [node name="Table" parent="." instance=ExtResource("2_agfsv")]
-position = Vector2(-28, -113)
+position = Vector2(16, 67)
+
+[node name="Players" parent="." instance=ExtResource("2_wjf51")]
+position = Vector2(-1, 251)

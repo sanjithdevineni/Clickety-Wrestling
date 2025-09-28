@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://34o2dng7inly"]
+
+[ext_resource type="Texture2D" uid="uid://d0oqiy3se4fai" path="res://assets/player_assets/P1.png" id="1_6wv28"]
+[ext_resource type="Texture2D" uid="uid://dea87x3il7dx6" path="res://assets/player_assets/Arms.png" id="2_86pjj"]
+[ext_resource type="Texture2D" uid="uid://xkx80a1nmmc6" path="res://assets/player_assets/P2.png" id="3_is83e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86pjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6wv28")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7tf4"]
+atlas = ExtResource("2_86pjj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fst48"]
+atlas = ExtResource("2_86pjj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkc0e"]
+atlas = ExtResource("2_86pjj")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5w0yp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7tf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fst48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkc0e")
+}],
+"loop": true,
+"name": &"Arm Wrestle",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_alpg7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_is83e")
+}],
+"loop": true,
+"name": &"P2",
+"speed": 5.0
+}]
+
+[node name="Players" type="Node2D"]
+z_index = 5
+
+[node name="P1" type="AnimatedSprite2D" parent="."]
+z_index = 5
+texture_filter = 1
+position = Vector2(231.75, 146.25)
+scale = Vector2(13.515626, 13.515626)
+sprite_frames = SubResource("SpriteFrames_86pjj")
+
+[node name="Arm Wrestle" type="AnimatedSprite2D" parent="."]
+z_index = 5
+texture_filter = 1
+position = Vector2(795, 144.00002)
+scale = Vector2(13.537107, 11.261874)
+sprite_frames = SubResource("SpriteFrames_5w0yp")
+animation = &"Arm Wrestle"
+autoplay = "Arm Wrestle"
+frame_progress = 0.43937284
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+texture_filter = 1
+position = Vector2(1332, 167)
+scale = Vector2(13.516, 13.516)
+sprite_frames = SubResource("SpriteFrames_alpg7")
+animation = &"P2"
