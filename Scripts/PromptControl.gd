@@ -1,11 +1,18 @@
 extends Control
 
 @onready var label: Label = get_node_or_null("MainLabel") as Label
+@onready var arrow_sprite: AnimatedSprite2D = $"../../RedArrow"   # your sprite node
+
 var _seq_len := 0
 
 const DIR_TO_ARROW := {"up":"↑","down":"↓","left":"←","right":"→"}
 # Map directions to sprite frames
-
+const DIR_TO_FRAME := {
+	"up": 0,
+	"right": 1,
+	"down": 2,
+	"left": 3
+}
 
 func _ensure_label() -> bool:
 	if label == null:
@@ -30,7 +37,11 @@ func show_arrow_color(dir: String, p) -> void:
 		1: label.add_theme_color_override("font_color", Color.hex(0xff3b30ff)) # red
 		2: label.add_theme_color_override("font_color", Color.hex(0xffcc00ff)) # yellow
 		# update arrow sprite frame
-
+	if dir in DIR_TO_FRAME:
+		arrow_sprite.animation = "default"    # make sure it’s set
+		arrow_sprite.play()
+		arrow_sprite.frame = DIR_TO_FRAME[dir]
+		arrow_sprite.stop()   # lock on that frame
 
 func set_pop_visible(on: bool) -> void:
 	if not _ensure_label(): return
