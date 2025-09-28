@@ -169,6 +169,11 @@ func _start_phase(new_phase: int) -> void:
 			p2_seq_idx = 0
 			p1_prompt.call("show_sequence", p1_seq)
 			p2_prompt.call("show_sequence", p2_seq)
+			
+			if p1_seq.size() > 0:
+				p1_prompt.call("set_big_arrow", p1_seq[0], int(Phase.YELLOW))
+			if p2_seq.size() > 0:
+				p2_prompt.call("set_big_arrow", p2_seq[0], int(Phase.YELLOW))
 
 func _end_round():
 	audio.pitch_scale = 1.0
@@ -273,26 +278,36 @@ func _advance_seq(player: int, dir: String):
 		if dir == p1_seq[p1_seq_idx]:
 			p1_seq_idx += 1
 			p1_prompt.call("highlight_seq_index", p1_seq_idx)
-			if p1_seq_idx >= p1_seq.size():
+			if p1_seq_idx < p1_seq.size():
+				p1_prompt.call("set_big_arrow", p1_seq[p1_seq_idx], int(Phase.YELLOW))
+			else:
 				p1_boost_time = BOOST_DURATION
 				p1_prompt.call("set_boost_visual", true)
-				#phase_time_left = min(phase_time_left, 0.5)  # wrap up yellow soon
+				# show GREEN target while P2 is still solving
+				p1_prompt.call("show_arrow_color", target_dir, int(Phase.GREEN))
 		else:
 			p1_seq_idx = 0
 			p1_prompt.call("highlight_seq_index", 0)
+			# on mistake, show the first arrow again
+			if p1_seq.size() > 0:
+				p1_prompt.call("set_big_arrow", p1_seq[0], int(Phase.YELLOW))
 	else:
 		if p2_seq.size() == 0 or p2_seq_idx >= p2_seq.size():
 			return
 		if dir == p2_seq[p2_seq_idx]:
 			p2_seq_idx += 1
 			p2_prompt.call("highlight_seq_index", p2_seq_idx)
-			if p2_seq_idx >= p2_seq.size():
+			if p2_seq_idx < p2_seq.size():
+				p2_prompt.call("set_big_arrow", p2_seq[p2_seq_idx], int(Phase.YELLOW))
+			else:
 				p2_boost_time = BOOST_DURATION
 				p2_prompt.call("set_boost_visual", true)
-				#phase_time_left = min(phase_time_left, 0.5)
+				p2_prompt.call("show_arrow_color", target_dir, int(Phase.GREEN))
 		else:
 			p2_seq_idx = 0
 			p2_prompt.call("highlight_seq_index", 0)
+			if p2_seq.size() > 0:
+				p2_prompt.call("set_big_arrow", p2_seq[0], int(Phase.YELLOW))
 
 
 func _add_progress(player: int, amount: float):

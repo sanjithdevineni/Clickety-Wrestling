@@ -58,6 +58,17 @@ func set_pop_visible(on: bool) -> void:
 	if not _ensure_label(): return
 	if on:
 		label.text += "  (GO!)"
+		
+func set_big_arrow(dir: String, p: int = 2) -> void:
+	# p = phase (0 green, 1 red, 2 yellow) just to pick the anim set
+	if dir in DIR_TO_FRAME:
+		var anim_name: String = PHASE_TO_ANIM.get(int(p), "red") as String
+		arrow_sprite.animation = anim_name
+		arrow_sprite.stop()
+		arrow_sprite.frame = DIR_TO_FRAME[dir]
+		arrow_sprite.z_index = 2
+		if label:
+			label.z_index = 1
 
 func show_sequence(seq: Array) -> void:
 	if not _ensure_label(): return
@@ -66,6 +77,9 @@ func show_sequence(seq: Array) -> void:
 	for d in seq:
 		arrows.append(DIR_TO_ARROW.get(d, "?"))
 	label.text = "YELLOW SEQ: " + " ".join(arrows)
+	# show the first required arrow as the big sprite
+	if seq.size() > 0:
+		set_big_arrow(seq[0], 2) # 2 = Phase.YELLOW
 
 func highlight_seq_index(i: int) -> void:
 	if not _ensure_label(): return
