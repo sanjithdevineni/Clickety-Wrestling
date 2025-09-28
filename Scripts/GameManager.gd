@@ -29,11 +29,11 @@ var p2_seq: Array[String] = []
 var p1_seq_idx := 0
 var p2_seq_idx := 0
 
-const GREEN_TICK := 0.6
-const RED_CHUNK := 6.0
-const EARLY_PENALTY := 1.0
-const BOOST_MULTI := 2.0
-const BOOST_DURATION := 4.0
+@export var GREEN_TICK := 0.6
+@export var RED_CHUNK := 6.0
+@export var EARLY_PENALTY := 1.0
+@export var BOOST_MULTI := 2.0
+@export var BOOST_DURATION := 4.0
 
 func set_hud_visible(on: bool) -> void:
 	(p1_bar as CanvasItem).visible = on

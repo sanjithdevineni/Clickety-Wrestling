@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b37v4clvfxo0t" path="res://Scripts/PromptControl.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://diqldobutofpt" path="res://Scripts/MenuPanel.gd" id="4_cm0pq"]
 [ext_resource type="Script" uid="uid://bl11ggs5y8hx2" path="res://Scripts/VictoryPanel.gd" id="5_pbw6q"]
+[ext_resource type="Script" uid="uid://dmyjfqab5qdwl" path="res://Scenes/instructions_button.gd" id="6_pbw6q"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -190,3 +191,10 @@ text = "Play Again"
 [node name="MenuButton" type="Button" parent="UI/VictoryPanel/Center/Panel/VBox"]
 layout_mode = 2
 text = "Main Menu"
+
+[node name="InstructionsButton" type="Button" parent="UI/MenuPanel/Center/Panel/VBox"]
+layout_mode = 2
+text = "Instructions"
+script = ExtResource("6_pbw6q")
+
+[connection signal="pressed" from="UI/MenuPanel/Center/Panel/VBox/InstructionsButton" to="UI/MenuPanel/Center/Panel/VBox/InstructionsButton" method="_on_pressed"]

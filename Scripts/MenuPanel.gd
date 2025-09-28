@@ -49,7 +49,7 @@ func _on_start() -> void:
 	var n2 := p2_edit.text.strip_edges()
 	if n1 == "": n1 = "Player 1"
 	if n2 == "": n2 = "Player 2"
-
+	
 	if "start_game" in gm:
 		gm.start_game(n1, n2)
 
