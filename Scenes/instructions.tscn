@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmywdqpgfs4xh"]
+[gd_scene load_steps=6 format=3 uid="uid://dmywdqpgfs4xh"]
 
+[ext_resource type="FontFile" uid="uid://dd1vumkq76et8" path="res://Assets/Fonts/Game Paused DEMO.otf" id="1_5doqj"]
 [ext_resource type="Script" uid="uid://bfcjxljrdgjh7" path="res://Scripts/button.gd" id="1_8p7yn"]
 [ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://Assets/Floor.jpg" id="2_dxknu"]
 
@@ -46,6 +47,7 @@ offset_right = 203.52582
 offset_bottom = 648.75867
 grow_horizontal = 2
 scale = Vector2(1.1129893, 1.0464476)
+theme_override_fonts/font = ExtResource("1_5doqj")
 text = "                                         Instructions
 Both players must match the direction of the arrows
  using WASD (Player One) or the Arrow Keys (Player Two). 
