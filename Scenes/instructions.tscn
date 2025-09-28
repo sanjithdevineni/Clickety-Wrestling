@@ -25,13 +25,15 @@ alignment = 3
 layout_mode = 0
 offset_left = 0.40442538
 offset_top = -2.8430457
-offset_right = 476.27222
-offset_bottom = 546.8884
-scale = Vector2(0.97179174, 0.7524823)
+offset_right = 473.35278
+offset_bottom = 545.629
+scale = Vector2(1.0080267, 1.0512971)
 text = "                                         Instructions
 Both players must match the direction of the arrows
  using WASD (Player One) or the Arrow Keys (Player Two). 
 The color shows the rhythm of the game:
+
+
 
 Green → Mash the key that’s being displayed.
 Yellow → Complete the sequence to return to green. 
@@ -46,7 +48,7 @@ offset_left = 962.0
 offset_top = 761.0
 offset_right = 1379.0
 offset_bottom = 869.0
-text = "Continue"
+text = "Main Menu"
 script = ExtResource("1_8p7yn")
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
