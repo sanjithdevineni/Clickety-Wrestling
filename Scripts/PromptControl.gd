@@ -55,9 +55,10 @@ func show_arrow_color(dir: String, p) -> void:
 		label.z_index = 1
 
 func set_pop_visible(on: bool) -> void:
-	if not _ensure_label(): return
-	if on:
-		label.text += "  (GO!)"
+	#if not _ensure_label(): return
+	#if on:
+		#label.text += "  (GO!)"
+		pass
 		
 func set_big_arrow(dir: String, p: int = 2) -> void:
 	# p = phase (0 green, 1 red, 2 yellow) just to pick the anim set

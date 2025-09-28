@@ -12,6 +12,7 @@ var phase: Phase = Phase.GREEN
 @onready var p2_name := $"../UI/P2Name"
 @onready var menu := $"../UI/MenuPanel"
 @onready var victory := $"../UI/VictoryPanel"
+@onready var go_overlay := $"../UI/GoOverlay"
 
 var round_active := false
 var game_active := false
@@ -31,6 +32,17 @@ var p2_seq_idx := 0
 
 var p1_yellow_done := false
 var p2_yellow_done := false
+
+# --- RED "GO!" timing and visuals ---
+#var _go_node: Control = null      # runtime overlay container
+var _red_go_popped := false
+
+@export var RED_DELAY_MIN := 1.10
+@export var RED_DELAY_MAX := 1.70
+@export var RED_GO_LEAD   := 0.35   # show GO this many seconds before clicks are valid
+@export var RED_GO_DURATION := 1.20
+@export var RED_GO_SCALE    := 1.80
+
 
 @export var GREEN_TICK := 0.6
 @export var RED_CHUNK := 6.0
@@ -110,11 +122,15 @@ func _process(delta: float) -> void:
 	if p1_boost_time > 0: p1_boost_time -= delta
 	if p2_boost_time > 0: p2_boost_time -= delta
 
-	if phase == Phase.RED and red_pop_time > 0.0:
-		red_pop_time -= delta
-		if red_pop_time <= 0.0:
-			p1_prompt.call("set_pop_visible", true)
-			p2_prompt.call("set_pop_visible", true)
+	if phase == Phase.RED:
+		if red_pop_time > 0.0:
+			red_pop_time -= delta
+			# Pop big centered GO once, shortly before inputs become valid
+			if not _red_go_popped and red_pop_time <= max(0.0, RED_GO_LEAD):
+				_red_go_popped = true
+				if go_overlay:
+					go_overlay.show_go(RED_GO_DURATION, RED_GO_SCALE)
+
 
 	# update bars (keep your UI style)
 	p1_bar.value = p1_progress
@@ -141,6 +157,11 @@ func _start_phase(new_phase: int) -> void:
 	target_dir = _random_dir()
 	p1_prompt.call("show_arrow_color", target_dir, int(phase))
 	p2_prompt.call("show_arrow_color", target_dir, int(phase))
+	
+	#_remove_go_now()     # hide any previous GO
+	
+	if go_overlay: go_overlay.hide_now()
+	_red_go_popped = false
 
 	match phase:
 		Phase.GREEN:
@@ -152,8 +173,9 @@ func _start_phase(new_phase: int) -> void:
 			
 		Phase.RED:
 			phase_time_left = randf_range(3.0, 5.0)
-			red_pop_time = randf_range(0.4, 0.8)
+			red_pop_time    = randf_range(RED_DELAY_MIN, RED_DELAY_MAX)
 			audio.pitch_scale = 0.8
+			_red_go_popped = false
 			p1_prompt.call("set_pop_visible", false)
 			p2_prompt.call("set_pop_visible", false)
 			
@@ -226,6 +248,49 @@ func _make_seq(n: int) -> Array[String]:
 	var arr: Array[String] = []
 	for i in n: arr.append(_random_dir())
 	return arr
+	
+#func _remove_go_now() -> void:
+	#if _go_node and is_instance_valid(_go_node):
+		#_go_node.queue_free()
+	#_go_node = null
+
+#func _flash_go(duration: float = 1.15, scale_mult: float = 1.8) -> void:
+	#_remove_go_now()
+
+	#var root := get_tree().root
+	#var canvas := Control.new()
+	#canvas.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	#canvas.top_level = true
+	#canvas.set_anchors_preset(Control.PRESET_FULL_RECT, true)
+	#canvas.offset_left = 0
+	#canvas.offset_top = 0
+	#canvas.offset_right = 0
+	#canvas.offset_bottom = 0
+	#root.add_child(canvas)                        # always on top
+	##_go_node = canvas
+#
+	#var lbl := Label.new()
+	#lbl.text = "GO!"
+	#lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	#lbl.vertical_alignment   = VERTICAL_ALIGNMENT_CENTER
+	#var fs := clampi(int(root.size.y * 0.20), 72, 220)
+	#lbl.add_theme_font_size_override("font_size", fs)
+	#lbl.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
+	#lbl.set_anchors_preset(Control.PRESET_CENTER, true)
+	#lbl.pivot_offset = lbl.size * 0.5
+	#lbl.position = root.size * 0.5
+	#lbl.modulate.a = 0.0
+	#lbl.scale = Vector2(0.6 * scale_mult, 0.6 * scale_mult)
+	#canvas.add_child(lbl)
+#
+	#var tw := create_tween()
+	#tw.tween_property(lbl, "modulate:a", 1.0, 0.12)
+	#tw.parallel().tween_property(lbl, "scale", Vector2(scale_mult, scale_mult), 0.18)\
+		#.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	#tw.tween_interval(max(0.0, duration - 0.30))
+	#tw.tween_property(lbl, "modulate:a", 0.0, 0.18)
+	#tw.tween_callback(func(): _remove_go_now())
+
 
 func on_player_tap(player: int, dir: String) -> void:
 	if not game_active or not round_active:

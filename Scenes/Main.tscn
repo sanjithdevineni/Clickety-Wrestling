@@ -8,10 +8,11 @@
 [ext_resource type="Script" uid="uid://diqldobutofpt" path="res://Scripts/MenuPanel.gd" id="4_cm0pq"]
 [ext_resource type="Script" path="res://Scripts/VictoryPanel.gd" id="5_pbw6q"]
 [ext_resource type="Script" path="res://Scripts/instructions_button.gd" id="5_v1gob"]
-[ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://Assets/Floor.jpg" id="7_jw32o"]
-[ext_resource type="PackedScene" path="res://Scenes/table.tscn" id="7_vy5pj"]
-[ext_resource type="PackedScene" uid="uid://bfy1h5ajve1uo" path="res://Scenes/Players.tscn" id="8_bmxlf"]
-[ext_resource type="PackedScene" uid="uid://cb5xo2dqokv6y" path="res://Scenes/music.tscn" id="12_grg3l"]
+[ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://assets/Floor.jpg" id="7_jw32o"]
+[ext_resource type="PackedScene" uid="uid://ds56wb6s00wk" path="res://Scenes/table.tscn" id="7_vy5pj"]
+[ext_resource type="PackedScene" path="res://Scenes/Players.tscn" id="8_bmxlf"]
+[ext_resource type="Script" uid="uid://dfk006yro5ef3" path="res://Scripts/GoOverlay.gd" id="11_grg3l"]
+[ext_resource type="PackedScene" path="res://Scenes/music.tscn" id="12_grg3l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kpch"]
 bg_color = Color(0.3529412, 0.3529412, 0.3529412, 1)
@@ -1346,6 +1347,29 @@ position = Vector2(61, 165)
 
 [node name="Players" parent="UI" instance=ExtResource("8_bmxlf")]
 position = Vector2(26, 330)
+
+[node name="GoOverlay" type="Control" parent="UI"]
+visible = false
+z_index = 1000
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_grg3l")
+
+[node name="Center" type="CenterContainer" parent="UI/GoOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GoLabel" type="Label" parent="UI/GoOverlay/Center"]
+layout_mode = 2
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vy5pj")
