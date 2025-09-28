@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ieisg6b7t27m"]
+[gd_scene load_steps=18 format=3 uid="uid://ieisg6b7t27m"]
 
 [ext_resource type="Script" uid="uid://wi260e1iw7yv" path="res://Scripts/GameManager.gd" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://bqr4udpwhbmx2" path="res://Scripts/Player.gd" id="2_uu6xs"]
@@ -10,7 +10,19 @@
 [ext_resource type="Script" path="res://Scripts/instructions_button.gd" id="5_v1gob"]
 [ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://Assets/Floor.jpg" id="7_jw32o"]
 [ext_resource type="PackedScene" path="res://Scenes/table.tscn" id="7_vy5pj"]
-[ext_resource type="PackedScene" path="res://Scenes/Players.tscn" id="8_bmxlf"]
+[ext_resource type="PackedScene" uid="uid://bfy1h5ajve1uo" path="res://Scenes/Players.tscn" id="8_bmxlf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kpch"]
+bg_color = Color(0.3529412, 0.3529412, 0.3529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
+bg_color = Color(0.8235294, 0.17254902, 0.20784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkhe"]
+bg_color = Color(0.3529412, 0.3529412, 0.3529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1p5hy"]
+bg_color = Color(0.06666667, 0.49803922, 0.88235295, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_50glp"]
 texture = ExtResource("7_jw32o")
@@ -1132,6 +1144,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_4kpch")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/background = SubResource("StyleBoxFlat_4kpch")
+theme_override_styles/fill = SubResource("StyleBoxFlat_grg3l")
 metadata/_edit_use_anchors_ = true
 
 [node name="P2Bar" type="ProgressBar" parent="UI"]
@@ -1144,6 +1158,8 @@ offset_bottom = 27.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("3_4kpch")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/background = SubResource("StyleBoxFlat_frkhe")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1p5hy")
 metadata/_edit_use_anchors_ = true
 
 [node name="P1Prompt" type="Control" parent="UI"]
@@ -1325,10 +1341,10 @@ theme_override_fonts/font = ExtResource("3_4kpch")
 text = "Main Menu"
 
 [node name="Table" parent="UI" instance=ExtResource("7_vy5pj")]
-position = Vector2(-7, 167)
+position = Vector2(61, 165)
 
 [node name="Players" parent="UI" instance=ExtResource("8_bmxlf")]
-position = Vector2(-31, 330)
+position = Vector2(26, 330)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vy5pj")

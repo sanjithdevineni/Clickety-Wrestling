@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://34o2dng7inly"]
+[gd_scene load_steps=12 format=3 uid="uid://bfy1h5ajve1uo"]
 
-[ext_resource type="Texture2D" uid="uid://d0oqiy3se4fai" path="res://assets/player_assets/P1.png" id="1_6wv28"]
-[ext_resource type="Texture2D" uid="uid://bu6xjpm30lvdf" path="res://assets/player_assets/Arms.png" id="2_is83e"]
-[ext_resource type="Texture2D" uid="uid://xkx80a1nmmc6" path="res://assets/player_assets/P2.png" id="3_is83e"]
+[ext_resource type="Texture2D" uid="uid://d0oqiy3se4fai" path="res://Assets/player_assets/P1.png" id="1_6wv28"]
+[ext_resource type="Texture2D" uid="uid://bu6xjpm30lvdf" path="res://Assets/player_assets/Arms.png" id="2_is83e"]
+[ext_resource type="Texture2D" uid="uid://xkx80a1nmmc6" path="res://Assets/player_assets/P2.png" id="3_is83e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_86pjj"]
 animations = [{
@@ -85,7 +85,7 @@ z_index = 5
 [node name="P1" type="AnimatedSprite2D" parent="."]
 z_index = 5
 texture_filter = 1
-position = Vector2(231.75, 146.25)
+position = Vector2(210, 146.25)
 scale = Vector2(13.515626, 13.515626)
 sprite_frames = SubResource("SpriteFrames_86pjj")
 
@@ -102,7 +102,7 @@ frame_progress = 0.92737603
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
 texture_filter = 1
-position = Vector2(1332, 167)
+position = Vector2(1388, 170)
 scale = Vector2(13.516, 13.516)
 sprite_frames = SubResource("SpriteFrames_alpg7")
 animation = &"P2"
