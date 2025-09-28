@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://drplyisbn7int"]
+
+[ext_resource type="Texture2D" uid="uid://bco0146cfcmny" path="res://Floor.jpg" id="1_nvnu3"]
+[ext_resource type="PackedScene" uid="uid://c2sdi14kuf5v6" path="res://Scenes/table.tscn" id="2_agfsv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_agfsv"]
+load_path = "res://.godot/imported/Floor.png-1986a68a011c9d9847f815defae65829.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wjf51"]
+texture = SubResource("CompressedTexture2D_agfsv")
+texture_region_size = Vector2i(120, 120)
+6:0/0 = 0
+5:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1fqph"]
+sources/1 = SubResource("TileSetAtlasSource_wjf51")
+
+[node name="Floor" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_1fqph")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 1594.0
+offset_bottom = 891.0
+texture = ExtResource("1_nvnu3")
+
+[node name="Table" parent="." instance=ExtResource("2_agfsv")]
+position = Vector2(-28, -113)
