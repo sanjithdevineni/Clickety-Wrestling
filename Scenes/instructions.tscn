@@ -47,7 +47,7 @@ offset_top = 1.7586544
 offset_right = 203.52582
 offset_bottom = 648.75867
 grow_horizontal = 2
-scale = Vector2(1.1129893, 1.0464476)
+scale = Vector2(0.9447366, 0.6476374)
 theme_override_fonts/font = ExtResource("1_5doqj")
 text = "                                         Instructions
 Both players must match the direction of the arrows
