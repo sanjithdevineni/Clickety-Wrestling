@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://ieisg6b7t27m"]
+[gd_scene load_steps=16 format=3 uid="uid://ieisg6b7t27m"]
 
 [ext_resource type="Script" uid="uid://wi260e1iw7yv" path="res://Scripts/GameManager.gd" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://bqr4udpwhbmx2" path="res://Scripts/Player.gd" id="2_uu6xs"]
 [ext_resource type="Script" uid="uid://b37v4clvfxo0t" path="res://Scripts/PromptControl.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://diqldobutofpt" path="res://Scripts/MenuPanel.gd" id="4_cm0pq"]
-[ext_resource type="Script" uid="uid://bl11ggs5y8hx2" path="res://Scripts/VictoryPanel.gd" id="5_pbw6q"]
+[ext_resource type="Script" path="res://Scripts/VictoryPanel.gd" id="5_pbw6q"]
 [ext_resource type="Script" path="res://Scripts/instructions_button.gd" id="5_v1gob"]
-[ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://assets/Floor.jpg" id="7_jw32o"]
+[ext_resource type="Texture2D" uid="uid://gr18mpncmcus" path="res://Assets/Floor.jpg" id="7_jw32o"]
+[ext_resource type="Texture2D" uid="uid://wu7hyyut71jl" path="res://Assets/Red_Arrow.png" id="8_50glp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_50glp"]
 texture = ExtResource("7_jw32o")
@@ -1104,6 +1105,42 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_vy5pj"]
 sources/0 = SubResource("TileSetAtlasSource_50glp")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_50glp"]
+atlas = ExtResource("8_50glp")
+region = Rect2(0, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy5pj"]
+atlas = ExtResource("8_50glp")
+region = Rect2(183, 0, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmxlf"]
+atlas = ExtResource("8_50glp")
+region = Rect2(0, 225, 183, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kpch"]
+atlas = ExtResource("8_50glp")
+region = Rect2(183, 225, 183, 225)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frkhe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50glp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy5pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmxlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kpch")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Main" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
@@ -1299,5 +1336,9 @@ text = "Main Menu"
 tile_set = SubResource("TileSet_vy5pj")
 format = 2
 layer_0/tile_data = PackedInt32Array(3342353, 0, 0, 3407889, 0, 0, 3407927, 0, 0, 3407963, 0, 0, 3407964, 0, 0, 3407965, 0, 0, 2687070, 0, 0, 2687044, 0, 0, 2555916, 0, 0, 2621452, 0, 0, 2555934, 0, 0, 2555954, 0, 0, 2555977, 0, 0, 1900639, 0, 0, 1769544, 0, 0, 1769522, 0, 0, 1703966, 0, 0, 1769502, 0, 0, 1835019, 0, 0, 1179654, 0, 0, 1048606, 0, 0, 1114142, 0, 0, 1114157, 0, 0, 1179693, 0, 0, 1245244, 0, 0, 1245255, 0, 0, 1179736, 0, 0, 589919, 0, 0, 524357, 0, 0, 393263, 0, 0, 458785, 0, 0, 524302, 0, 0, 65539, 0, 0, 65566, 0, 0, 131124, 0, 0, 131148, 0, 0, 65638, 0, 0, 3211306, 0, 0)
+
+[node name="RedArrow" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_frkhe")
+frame_progress = 0.8004374
 
 [connection signal="pressed" from="UI/MenuPanel/Center/Panel/VBox/InstructionsButton" to="UI/MenuPanel/Center/Panel/VBox/InstructionsButton" method="_on_pressed"]

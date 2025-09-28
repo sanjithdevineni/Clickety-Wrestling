@@ -4,6 +4,8 @@ extends Control
 var _seq_len := 0
 
 const DIR_TO_ARROW := {"up":"↑","down":"↓","left":"←","right":"→"}
+# Map directions to sprite frames
+
 
 func _ensure_label() -> bool:
 	if label == null:
@@ -27,6 +29,8 @@ func show_arrow_color(dir: String, p) -> void:
 		0: label.add_theme_color_override("font_color", Color.hex(0x35c759ff)) # green
 		1: label.add_theme_color_override("font_color", Color.hex(0xff3b30ff)) # red
 		2: label.add_theme_color_override("font_color", Color.hex(0xffcc00ff)) # yellow
+		# update arrow sprite frame
+
 
 func set_pop_visible(on: bool) -> void:
 	if not _ensure_label(): return
