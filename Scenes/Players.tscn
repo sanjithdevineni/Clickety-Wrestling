@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://34o2dng7inly"]
+[gd_scene load_steps=12 format=3 uid="uid://34o2dng7inly"]
 
 [ext_resource type="Texture2D" uid="uid://d0oqiy3se4fai" path="res://assets/player_assets/P1.png" id="1_6wv28"]
-[ext_resource type="Texture2D" uid="uid://dea87x3il7dx6" path="res://assets/player_assets/Arms.png" id="2_86pjj"]
+[ext_resource type="Texture2D" uid="uid://bu6xjpm30lvdf" path="res://assets/player_assets/Arms.png" id="2_is83e"]
 [ext_resource type="Texture2D" uid="uid://xkx80a1nmmc6" path="res://assets/player_assets/P2.png" id="3_is83e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_86pjj"]
@@ -15,33 +15,57 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o7tf4"]
-atlas = ExtResource("2_86pjj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_alpg7"]
+atlas = ExtResource("2_is83e")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gt1v"]
+atlas = ExtResource("2_is83e")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcpyv"]
+atlas = ExtResource("2_is83e")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fst48"]
-atlas = ExtResource("2_86pjj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mc1p"]
+atlas = ExtResource("2_is83e")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kkc0e"]
-atlas = ExtResource("2_86pjj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2pid"]
+atlas = ExtResource("2_is83e")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5w0yp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o7tf4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fst48")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kkc0e")
+"texture": SubResource("AtlasTexture_alpg7")
 }],
 "loop": true,
-"name": &"Arm Wrestle",
-"speed": 10.0
+"name": &"P1 Win",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gt1v")
+}],
+"loop": true,
+"name": &"P2 Win",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcpyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mc1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2pid")
+}],
+"loop": true,
+"name": &"Wrestle",
+"speed": 18.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_alpg7"]
@@ -71,9 +95,9 @@ texture_filter = 1
 position = Vector2(795, 144.00002)
 scale = Vector2(13.537107, 11.261874)
 sprite_frames = SubResource("SpriteFrames_5w0yp")
-animation = &"Arm Wrestle"
-autoplay = "Arm Wrestle"
-frame_progress = 0.43937284
+animation = &"Wrestle"
+autoplay = "Wrestle"
+frame_progress = 0.92737603
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
