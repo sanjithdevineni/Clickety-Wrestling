@@ -29,11 +29,16 @@ var p2_seq: Array[String] = []
 var p1_seq_idx := 0
 var p2_seq_idx := 0
 
+var p1_yellow_done := false
+var p2_yellow_done := false
+
 @export var GREEN_TICK := 0.6
 @export var RED_CHUNK := 6.0
 @export var EARLY_PENALTY := 1.0
 @export var BOOST_MULTI := 2.0
 @export var BOOST_DURATION := 4.0
+@export var YELLOW_SEQ_LEN := 4        # 4 arrows per request
+@export var YELLOW_TIMEOUT := 10.0
 
 func set_hud_visible(on: bool) -> void:
 	(p1_bar as CanvasItem).visible = on
@@ -99,25 +104,34 @@ func start_game(p1n: String, p2n: String) -> void:
 func _process(delta: float) -> void:
 	if not game_active or not round_active:
 		return
+
+	# timers
 	phase_time_left -= delta
 	if p1_boost_time > 0: p1_boost_time -= delta
 	if p2_boost_time > 0: p2_boost_time -= delta
 
-	if phase == Phase.RED and red_pop_time > 0:
+	if phase == Phase.RED and red_pop_time > 0.0:
 		red_pop_time -= delta
-		if red_pop_time <= 0:
+		if red_pop_time <= 0.0:
 			p1_prompt.call("set_pop_visible", true)
 			p2_prompt.call("set_pop_visible", true)
 
+	# update bars (keep your UI style)
 	p1_bar.value = p1_progress
 	p2_bar.value = p2_progress
 
-	if p1_progress >= 100 or p2_progress >= 100:
+	if p1_progress >= 100.0 or p2_progress >= 100.0:
 		_end_round()
 		return
 
-	if phase_time_left <= 0:
-		_start_next_phase()
+	# phase exits
+	if phase == Phase.YELLOW:
+		# leave yellow when BOTH finished or safety timeout hits
+		if (p1_yellow_done and p2_yellow_done) or phase_time_left <= 0.0:
+			_start_next_phase()
+	else:
+		if phase_time_left <= 0.0:
+			_start_next_phase()
 
 func _start_next_phase():
 	_start_phase(randi() % 3)
@@ -135,17 +149,22 @@ func _start_phase(new_phase: int) -> void:
 			audio.pitch_scale = 1.0
 			p1_prompt.call("set_pop_visible", false)
 			p2_prompt.call("set_pop_visible", false)
+			
 		Phase.RED:
 			phase_time_left = randf_range(3.0, 5.0)
 			red_pop_time = randf_range(0.4, 0.8)
 			audio.pitch_scale = 0.8
 			p1_prompt.call("set_pop_visible", false)
 			p2_prompt.call("set_pop_visible", false)
+			
 		Phase.YELLOW:
-			phase_time_left = randf_range(4.0, 6.0)
+			phase_time_left = YELLOW_TIMEOUT
 			audio.pitch_scale = 1.25
-			p1_seq = _make_seq(3)
-			p2_seq = _make_seq(3)
+			p1_yellow_done = false
+			p2_yellow_done = false
+			
+			p1_seq = _make_seq(YELLOW_SEQ_LEN)
+			p2_seq = _make_seq(YELLOW_SEQ_LEN)
 			p1_seq_idx = 0
 			p2_seq_idx = 0
 			p1_prompt.call("show_sequence", p1_seq)
@@ -218,7 +237,33 @@ func on_player_tap(player: int, dir: String) -> void:
 				_add_progress(player, RED_CHUNK)
 				phase_time_left = 0.2
 		Phase.YELLOW:
-			_advance_seq(player, dir)
+			if player == 1:
+				if not p1_yellow_done:
+					_advance_seq(1, dir)            # keeps p1_seq_idx updated + highlights
+					if p1_seq_idx >= p1_seq.size():
+						p1_yellow_done = true
+						p1_boost_time = BOOST_DURATION
+						p1_prompt.call("set_boost_visual", true)
+						# ⬇️ flip ONLY P1 to GREEN while P2 still solves
+						p1_prompt.call("show_arrow_color", target_dir, int(Phase.GREEN))
+				else:
+					# P1 already green; allow scoring during P2's yellow
+					if dir == target_dir:
+						var mult1 := BOOST_MULTI if p1_boost_time > 0.0 else 1.0
+						_add_progress(1, GREEN_TICK * mult1)
+
+			else: # player 2
+				if not p2_yellow_done:
+					_advance_seq(2, dir)
+					if p2_seq_idx >= p2_seq.size():
+						p2_yellow_done = true
+						p2_boost_time = BOOST_DURATION
+						p2_prompt.call("set_boost_visual", true)
+						p2_prompt.call("show_arrow_color", target_dir, int(Phase.GREEN))
+				else:
+					if dir == target_dir:
+						var mult2 := BOOST_MULTI if p2_boost_time > 0.0 else 1.0
+						_add_progress(2, GREEN_TICK * mult2)
 
 func _advance_seq(player: int, dir: String):
 	if player == 1:
@@ -231,7 +276,7 @@ func _advance_seq(player: int, dir: String):
 			if p1_seq_idx >= p1_seq.size():
 				p1_boost_time = BOOST_DURATION
 				p1_prompt.call("set_boost_visual", true)
-				phase_time_left = min(phase_time_left, 0.5)  # wrap up yellow soon
+				#phase_time_left = min(phase_time_left, 0.5)  # wrap up yellow soon
 		else:
 			p1_seq_idx = 0
 			p1_prompt.call("highlight_seq_index", 0)
@@ -244,7 +289,7 @@ func _advance_seq(player: int, dir: String):
 			if p2_seq_idx >= p2_seq.size():
 				p2_boost_time = BOOST_DURATION
 				p2_prompt.call("set_boost_visual", true)
-				phase_time_left = min(phase_time_left, 0.5)
+				#phase_time_left = min(phase_time_left, 0.5)
 		else:
 			p2_seq_idx = 0
 			p2_prompt.call("highlight_seq_index", 0)
